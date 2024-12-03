@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Lesson Plan Generator</h2>
+    <form action="{{ url_for('lesson_plan_generator') }}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="subject_name">Subject Name</label>
+            <input type="text" class="form-control" id="subject_name" name="subject_name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="syllabus_image">Syllabus Image</label>
+            <input type="file" class="form-control-file" id="syllabus_image" name="syllabus_image" accept="image/*" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="calendar_image">Academic Calendar Image</label>
+            <input type="file" class="form-control-file" id="calendar_image" name="calendar_image" accept="image/*" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="start_date">Semester Start Date</label>
+            <input type="date" class="form-control" id="start_date" name="start_date" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="end_date">Semester End Date</label>
+            <input type="date" class="form-control" id="end_date" name="end_date" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="lecture_days">Lecture Days (0=Mon, 1=Tue, 2=Wed, etc.)</label>
+            <input type="text" class="form-control" id="lecture_days" name="lecture_days" placeholder="0,2,4" value="0,2,4" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Generate Lesson Plan</button>
+    </form>
+</div>
+{% endblock %}

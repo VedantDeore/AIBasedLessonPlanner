@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Academic Calendar</title>
+
+    <!-- CSS FILES -->        
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans&display=swap" rel="stylesheet">
+                        
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/css/bootstrap-icons.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: 'Open Sans', sans-serif;
+        }
+        .edit-calendar-container {
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .form-section {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .lecture-slot {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        #myProgress {
+            width: 100%;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        #myBar {
+            height: 25px;
+            background-color: #5cb85c;
+            width: 75%;
+            border-radius: 5px;
+            transition: width 0.5s ease-in-out;
+        }
+        .loading-screen {
+            display: none;
+            text-align: center;
+            font-size: 2em;
+            margin-top: 50px;
+            color: #007bff;
+        }
+        .btn-add {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="edit-calendar-container">
+            <h1 class="text-center mb-4">Edit Academic Calendar</h1>
+            
+            <form method="POST">
+                <div class="form-section">
+                    <h3>Key Events</h3>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="start_of_semester" class="form-label">Start of Semester</label>
+                            <input type="date" class="form-control" name="start_of_semester" value="{{ calendar_data['events']['start_of_semester'] or '' }}" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="end_of_semester" class="form-label">End of Semester</label>
+                            <input type="date" class="form-control" name="end_of_semester" value="{{ calendar_data['events']['end_of_semester'] or '' }}">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="class_test_1" class="form-label">Class Test 1</label>
+                            <input type="date" class="form-control" name="class_test_1" value="{{ calendar_data['events']['class_test_1'] or '' }}">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="mid_semester_reviews" class="form-label">Mid-Semester Reviews</label>
+                            <input type="date" class="form-control" name="mid_semester_reviews" value="{{ calendar_data['events']['mid_semester_reviews'] or '' }}">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="class_test_2" class="form-label">Class Test 2</label>
+                            <input type="date" class="form-control" name="class_test_2" value="{{ calendar_data['events']['class_test_2'] or '' }}">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="remedial_teaching" class="form-label">Remedial Teaching</label>
+                            <input type="date" class="form-control" name="remedial_teaching" value="{{ calendar_data['events']['remedial_teaching'] or '' }}">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Holidays</h3>
+                    <div id="holidays-container">
+                        {% for holiday in calendar_data['holidays'] %}
+                        <div class="input-group mb-2">
+                            <input type="text" class="form-control" name="holidays[]" value="{{ holiday }}">
+                            <button class="btn btn-danger" type="button" onclick="removeHoliday(this)">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                        {% endfor %}
+                        <button type="button" class="btn btn-primary btn-add" onclick="addHoliday()">
+                            <i class="bi bi-plus"></i> Add Holiday
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Lecture Times</h3>
+                    <div id="lecture-slots">
+                        {% for day, time in zip(calendar_data['lecture_days'], calendar_data['lecture_times']) %}
+                        <div class="lecture-slot">
+                            <select name="days[]" class="form-select" required>
+                                <option value="{{ day }}" selected>{{ day }}</option>
+                                <option value="Monday">Monday</option>
+                                <option value="Tuesday">Tuesday</option>
+                                <option value="Wednesday">Wednesday</option>
+                                <option value="Thursday">Thursday</option>
+                                <option value="Friday">Friday</option>
+                                <option value="Saturday">Saturday</option>
+                                <option value="Sunday">Sunday</option>
+                            </select>
+                            <select name="times[]" class="form-select" required>
+                                <option value="{{ time }}" selected>{{ time }}</option>
+                                <option value="9:00am - 10:00am">9:00am - 10:00am</option>
+                                <option value="10:00am - 11:00am">10:00am - 11:00am</option>
+                                <option value="11:00am - 12:00pm">11:00am - 12:00pm</option>
+                                <option value="1:00pm - 2:00pm">1:00pm - 2:00pm</option>
+                                <option value="2:00pm - 3:00pm">2:00pm - 3:00pm</option>
+                                <option value="3:00pm - 4:00pm">3:00pm - 4:00pm</option>
+                            </select>
+                            <button class="btn btn-danger" type="button" onclick="removeLectureSlot(this)">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button type="button" class="btn btn-primary btn-add mt-2" onclick="addLectureSlot()">
+                        <i class="bi bi-plus"></i> Add Lecture Slot
+                    </button>
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-success btn-lg" onclick="showLoadingScreen()">
+                        <i class="bi bi-save me-2"></i>Save Calendar
+                    </button>
+                </div>
+            </form>
+
+            <!-- Progress Bar -->
+            <div id="myProgress" class="mt-4">
+                <div id="myBar"></div>
+            </div>
+
+            <div id="loading" class="loading-screen">
+                Processing... Please wait.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function addLectureSlot() {
+            let slotContainer = document.getElementById('lecture-slots');
+            let newSlot = document.createElement('div');
+            newSlot.className = 'lecture-slot';
+            newSlot.innerHTML = `
+                <select name="days[]" class="form-select" required>
+                    <option value="">Select Day</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                </select>
+                <select name="times[]" class="form-select" required>
+                    <option value="">Select Time Slot</option>
+                    <option value="9:00am - 10:00am">9:00am - 10:00am</option>
+                    <option value="10:00am - 11:00am">10:00am - 11:00am</option>
+                    <option value="11:00am - 12:00pm">11:00am - 12:00pm</option>
+                    <option value="1:00pm - 2:00pm">1:00pm - 2:00pm</option>
+                    <option value="2:00pm - 3:00pm">2:00pm - 3:00pm</option>
+                    <option value="3:00pm - 4:00pm">3:00pm - 4:00pm</option>
+                </select>
+                <button class="btn btn-danger" type="button" onclick="removeLectureSlot(this)">
+                    <i class="bi bi-trash"></i>
+                </button>
+            `;
+            slotContainer.appendChild(newSlot);
+        }
+
+        function addHoliday() {
+            let holidaysContainer = document.getElementById('holidays-container');
+            let newHoliday = document.createElement('div');
+            newHoliday.className = 'input-group mb-2';
+            newHoliday.innerHTML = `
+                <input type="text" class="form-control" name="holidays[]" placeholder="Enter holiday name">
+                <button class="btn btn-danger" type="button" onclick="removeHoliday(this)">
+                    <i class="bi bi-trash"></i>
+                </button>
+            `;
+            holidaysContainer.insertBefore(newHoliday, holidaysContainer.lastElementChild);
+        }
+
+        function removeLectureSlot(button) {
+            button.closest('.lecture-slot').remove();
+        }
+
+        function removeHoliday(button) {
+            button.closest('.input-group').remove();
+        }
+
+        function showLoadingScreen() {
+            document.getElementById("myProgress").style.display = "none";
+            document.getElementById("loading").style.display = "block";
+            setTimeout(function() {
+                window.location.href = "final.html";  // Redirect to final page after loading
+            }, 2000);  // Simulating a 2-second loading process
+        }
+    </script>
+
+    <!-- JAVASCRIPT FILES -->
+    <script src="static/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+
+
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Calendar</title>
+    <style>
+        #myProgress {
+            width: 100%;
+            background-color: #ddd;
+            margin-bottom: 20px;
+        }
+        #myBar {
+            height: 30px;
+            background-color: #5cb85c;
+            width: 75%;  /* Updated width for editing */
+            transition: all ease-in-out 0.5s;
+        }
+        .loading-screen {
+            display: none;
+            text-align: center;
+            font-size: 2em;
+            margin-top: 50px;
+        }
+    </style>
+    <script>
+        function showLoadingScreen() {
+            document.getElementById("myProgress").style.display = "none";
+            document.getElementById("loading").style.display = "block";
+            setTimeout(function() {
+                window.location.href = "final.html";  // Redirect to final page after loading
+            }, 2000);  // Simulating a 2-second loading process
+        }
+    </script>
+
+    <title>Edit Calendar</title>
+    <script>
+        // Function to dynamically add lecture slots
+        function addLectureSlot() {
+            let slotContainer = document.getElementById('lecture-slots');
+            let newSlot = document.createElement('div');
+            newSlot.className = 'lecture-slot';
+            newSlot.innerHTML = `
+                <select name="days[]" required>
+                    <option value="">Select Day</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                </select>
+                <select name="times[]" required>
+                    <option value="">Select Time Slot</option>
+                    <option value="9:00am - 10:00am">9:00am - 10:00am</option>
+                    <option value="10:00am - 11:00am">10:00am - 11:00am</option>
+                    <option value="11:00am - 12:00pm">11:00am - 12:00pm</option>
+                    <option value="1:00pm - 2:00pm">1:00pm - 2:00pm</option>
+                    <option value="2:00pm - 3:00pm">2:00pm - 3:00pm</option>
+                    <option value="3:00pm - 4:00pm">3:00pm - 4:00pm</option>
+                </select>
+            `;
+            slotContainer.appendChild(newSlot);
+        }
+    </script>
+</head>
+<body>
+    <h1>Edit Calendar</h1>
+    <form method="POST">
+        <h3>Events</h3>
+        <label for="start_of_semester">Start of Semester</label>
+        <input type="date" name="start_of_semester" value="{{ calendar_data['events']['start_of_semester'] or '' }}" required><br>
+        
+        <label for="end_of_semester">End of Semester</label>
+        <input type="date" name="end_of_semester" value="{{ calendar_data['events']['end_of_semester'] or '' }}"><br>
+        
+        <label for="class_test_1">Class Test 1</label>
+        <input type="date" name="class_test_1" value="{{ calendar_data['events']['class_test_1'] or '' }}"><br>
+        
+        <label for="mid_semester_reviews">Mid-Semester Reviews</label>
+        <input type="date" name="mid_semester_reviews" value="{{ calendar_data['events']['mid_semester_reviews'] or '' }}"><br>
+        
+        <label for="class_test_2">Class Test 2</label>
+        <input type="date" name="class_test_2" value="{{ calendar_data['events']['class_test_2'] or '' }}"><br>
+        
+        <label for="remedial_teaching">Remedial Teaching</label>
+        <input type="date" name="remedial_teaching" value="{{ calendar_data['events']['remedial_teaching'] or '' }}"><br>
+
+        <h3>Holidays</h3>
+        <div id="holidays-container">
+            {% for holiday in calendar_data['holidays'] %}
+            <input type="text" name="holidays[]" value="{{ holiday }}">
+            {% endfor %}
+            <button type="button" onclick="addHoliday()">Add Holiday</button>
+        </div>
+
+        <h3>Lecture Times</h3>
+        <div id="lecture-slots">
+            {% for day, time in zip(calendar_data['lecture_days'], calendar_data['lecture_times']) %}
+            <div class="lecture-slot">
+                <select name="days[]" required>
+                    <option value="{{ day }}" selected>{{ day }}</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                    <option value="Saturday">Saturday</option>
+                    <option value="Sunday">Sunday</option>
+                </select>
+                <select name="times[]" required>
+                    <option value="{{ time }}" selected>{{ time }}</option>
+                    <option value="9:00am - 10:00am">9:00am - 10:00am</option>
+                    <option value="10:00am - 11:00am">10:00am - 11:00am</option>
+                    <option value="11:00am - 12:00pm">11:00am - 12:00pm</option>
+                    <option value="1:00pm - 2:00pm">1:00pm - 2:00pm</option>
+                    <option value="2:00pm - 3:00pm">2:00pm - 3:00pm</option>
+                    <option value="3:00pm - 4:00pm">3:00pm - 4:00pm</option>
+                </select>
+            </div>
+            {% endfor %}
+        </div>
+        <button type="button" onclick="addLectureSlot()">Add Another Lecture Slot</button>
+
+        <br><br>
+        <button type="submit">Save</button>
+    </form>
+
+     <!-- Progress Bar --
+     <div id="myProgress">
+        <div id="myBar"></div>
+    </div>
+
+    <div id="loading" class="loading-screen">
+        Processing... Please wait.
+    </div>
+</body>
+</html> -->

@@ -1,0 +1,62 @@
+1. Introduction to NLP 
+2. Text Preprocessing Techniques (Weightage: 5)
+2.1. Tokenization (Weightage: 2)
+2.2. Stop Words Removal (Weightage: 2)
+2.3. Stemming and Lemmatization (Weightage: 1)
+3. NLP Applications
+3.1. Sentiment Analysis (Weightage: 2)
+3.2. Machine Translation (Weightage: 2)
+3.3. Text Summarization (Weightage: 1)
+4. Introduction to Language Models 
+4.1. N-gram Models (Weightage: 2)
+4.2. Smoothing Techniques (Weightage: 1)
+4.3. Neural Language Models (Weightage: 2)
+4.4. Evaluation of Language Models (Weightage: 1)
+5. Introduction to Text Classification
+5.1. Feature Extraction (Weightage: 2)
+5.2. Bag of Words (Weightage: 1)
+5.3. TF-IDF (Weightage: 1)
+5.4. Classification Algorithms (Weightage: 3)
+5.4.1. Naive Bayes (Weightage: 1)
+5.4.2. Support Vector Machines (Weightage: 1)
+5.4.3. Deep Learning Approaches (Weightage: 1)
+5.5. Evaluation Metrics (Weightage: 1)
+6. Introduction to NER 
+6.1. Entity Types (Weightage: 2)
+6.2. Rule-based NER (Weightage: 1)
+6.3. Machine Learning Approaches (Weightage: 2)
+6.4. Evaluation of NER Systems (Weightage: 1)
+7. Introduction to POS Tagging 
+7.1. POS Tags and Tassets (Weightage: 2)
+7.2. Rule-based Tagging (Weightage: 1)
+7.3. Statistical Tagging (Weightage: 2)
+7.4. Neural Network Approaches (Weightage: 1)
+8. Introduction to Syntax and Parsing 
+8.1. Context-Free Grammars (Weightage: 2)
+8.2. Parsing Algorithms (Weightage: 4)
+8.2.1. Top-Down Parsing (Weightage: 1)
+8.2.2. Bottom-Up Parsing (Weightage: 1)
+8.3. Dependency Parsing (Weightage: 1)
+8.4. Applications of Parsing (Weightage: 1)
+9. Introduction to Sentiment Analysis 
+9.1. Lexicon-based Approaches (Weightage: 2)
+9.2. Machine Learning Approaches (Weightage: 2)
+9.3. Deep Learning for Sentiment Analysis (Weightage: 1)
+9.4. Evaluation Metrics (Weightage: 1)
+10. Introduction to Machine Translation 
+10.1. Rule-based Machine Translation (Weightage: 2)
+10.2. Statistical Machine Translation (Weightage: 2)
+10.3. Neural Machine Translation (Weightage: 2)
+10.4. Evaluation of Translation Quality (Weightage: 1)
+11. Introduction to Text Summarization 
+11.1. Extractive Summarization (Weightage: 2)
+11.2. Abstractive Summarization (Weightage: 2)
+11.3. Evaluation Metrics (Weightage: 1)
+11.4. Applications of Text Summarization (Weightage: 1)
+12. Introduction to Question Answering
+12.1. Types of Question Answering Systems (Weightage: 3)
+12.1.1. Fact-based (Weightage: 1)
+12.1.2. Opinion-based (Weightage: 1)
+12.2. Information Retrieval for QA (Weightage: 2)
+12.3. Deep Learning Approaches (Weightage: 1)
+12.4. Evaluation of QA Systems (Weightage: 1)

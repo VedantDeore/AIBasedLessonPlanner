@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Calendar</title>
+</head>
+<body>
+    <h1>Upload Academic Calendar</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Extract Data</button>
+    </form>
+
+    {% if semester_data %}
+    <h2>Semester Details</h2>
+    <ul>
+        <li><strong>Semester Start:</strong> {{ semester_data.semester_start }}</li>
+        <li><strong>Mid Semester:</strong> 
+            {% if semester_data.mid_sem %}
+                {{ semester_data.mid_sem[0] }} to {{ semester_data.mid_sem[1] }}
+            {% else %}
+                Not Available
+            {% endif %}
+        </li>
+        <li><strong>End Semester:</strong> 
+            {% if semester_data.end_sem %}
+                {{ semester_data.end_sem[0] }} to {{ semester_data.end_sem[1] }}
+            {% else %}
+                Not Available
+            {% endif %}
+        </li>
+        <li><strong>Semester End:</strong> {{ semester_data.semester_end }}</li>
+    </ul>
+    {% endif %}
+
+    {% if holidays %}
+    <h2>Holidays</h2>
+    <ul>
+        {% for holiday in holidays %}
+        <li>{{ holiday.holiday }}: {{ holiday.date }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>

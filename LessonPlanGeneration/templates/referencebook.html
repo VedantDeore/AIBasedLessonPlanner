@@ -1,0 +1,146 @@
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson Plan</title>
+</head>
+<body>
+    <h1>Lesson Plan</h1>
+    
+    <form action="/final_plan" method="POST">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Section</th> <!-- New Section column --
+                    <th>Date</th>
+                    <th>Day</th>
+                    <th>Lecture Number</th>
+                    <th>Time Slot</th>
+                    <th>Topic</th>
+                    <th>Method</th>
+                    <th>Student Activity</th>
+                    <th>Assessment Tool</th>
+                    <th>Remarks</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in lesson_plan %}
+                    <tr>
+                        <td>{{ entry['section'] }}</td> <!-- Display the Section value here --
+                        <td>
+                            <input type="date" name="date_{{ loop.index }}" value="{{ entry['date'] }}">
+                        </td>
+                        <td>{{ entry['day'] }}</td>
+                        <td>{{ entry['lecture_number'] }}</td>
+                        <td>
+                            <input type="text" name="time_slot_{{ loop.index }}" value="{{ entry['time_slot'] }}">
+                        </td>
+                        <td>
+                            <input type="text" name="topic_{{ loop.index }}" value="{{ entry['topic'] }}">
+                        </td>
+                        <td>
+                            <input type="text" name="method_{{ loop.index }}" value="{{ entry['method'] }}">
+                        </td>
+                        <td>
+                            <input type="text" name="student_activity_{{ loop.index }}" value="{{ entry['student_activity'] }}">
+                        </td>
+                        <td>
+                            <select name="assessment_tool_{{ loop.index }}">
+                                <option value="Quiz" {% if entry['assessment_tool'] == 'Quiz' %}selected{% endif %}>Quiz</option>
+                                <option value="HA" {% if entry['assessment_tool'] == 'HA' %}selected{% endif %}>HA</option>
+                                <option value="Tutorial" {% if entry['assessment_tool'] == 'Tutorial' %}selected{% endif %}>Tutorial</option>
+                                <option value="ESE" {% if entry['assessment_tool'] == 'ESE' %}selected{% endif %}>ESE</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" name="remarks_{{ loop.index }}" value="{{ entry['remarks'] }}">
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <button type="submit">Save Changes</button>
+    </form>
+
+    <br>
+
+    <a href="/download_lesson_plan">Download Lesson Plan</a>
+
+</body>
+</html> -->
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson Plan</title>
+</head>
+<body>
+    <h1>Lesson Plan</h1>
+    
+    <form action="/final_plan" method="POST">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Day</th>
+                    <th>Lecture Number</th>
+                    <th>Time Slot</th>
+                    <th>Topic</th>
+                    <th>Method</th>
+                    <th>Student Activity</th>
+                    <th>Assessment Tool</th>
+                    <th>Remarks</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in lesson_plan %}
+                    <tr>
+                        <td>
+                            <input type="date" name="date_{{ loop.index }}" value="{{ entry['date'] }}">
+                        </td>
+                        <td>{{ entry['day'] }}</td>
+                        <td>{{ entry['lecture_number'] }}</td>
+                        <td>
+                            <input type="text" name="time_slot_{{ loop.index }}" value="{{ entry['time_slot'] }}">
+                        </td>
+                        <td>
+                            <input type="text" name="topic_{{ loop.index }}" value="{{ entry['topic'] }}">
+                        </td>
+                        <td>
+                            <input type="text" name="method_{{ loop.index }}" value="{{ entry['method'] }}">
+                        </td>
+                        <td>
+                            <input type="text" name="student_activity_{{ loop.index }}" value="{{ entry['student_activity'] }}">
+                        </td>
+                        <td>
+                            <select name="assessment_tool_{{ loop.index }}">
+                                <option value="Quiz" {% if entry['assessment_tool'] == 'Quiz' %}selected{% endif %}>Quiz</option>
+                                <option value="HA" {% if entry['assessment_tool'] == 'HA' %}selected{% endif %}>HA</option>
+                                <option value="Tutorial" {% if entry['assessment_tool'] == 'Tutorial' %}selected{% endif %}>Tutorial</option>
+                                <option value="ESE" {% if entry['assessment_tool'] == 'ESE' %}selected{% endif %}>ESE</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text" name="remarks_{{ loop.index }}" value="{{ entry['remarks'] }}">
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <button type="submit">Save Changes</button>
+    </form>
+
+    <br>
+
+    <a href="/download_lesson_plan">Download Lesson Plan</a>
+
+</body>
+</html> -->

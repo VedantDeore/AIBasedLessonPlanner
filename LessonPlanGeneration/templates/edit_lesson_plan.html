@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Lesson Plan</title>
+</head>
+<body>
+    <h1>Edit Lesson Plan</h1>
+    <form method="POST">
+        {% for entry in lesson_plan %}
+        <label>Date: <input type="text" name="date[]" value="{{ entry.date }}"></label>
+        <label>Topic: <input type="text" name="topic[]" value="{{ entry.topic }}"></label>
+        <br>
+        {% endfor %}
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>

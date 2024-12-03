@@ -1,0 +1,22 @@
+Date,Day,Lecture No,Topic
+2024-12-06,Friday,1,SECTION-I
+2024-12-09,Monday,2,"Types of Learning: Supervised, Unsupervised, Reinforcement. Concept Learning: Concept Learning,"
+2024-12-11,Wednesday,3,"General-to-Specific Ordering: Task, search, Find S algorithm, Version space and the candidate elimination"
+2024-12-13,Friday,4,"algorithm, inductive bias, Bias, Variance, Underfitting, Overfitting."
+2024-12-16,Monday,5,"Decision Tree Learning: Representation, Basic decision tree learning algorithm, Issues in decision tree"
+2024-12-18,Wednesday,6,"learning, and Random Forest Model."
+2024-12-20,Friday,7,"Validation: Cross validation, Confusion matrix."
+2024-12-23,Monday,8,"Bayesian Learning: Probability, Bayesian Learning: Bayes theorem,Naive Bayes algorithm, Maximum"
+2024-12-25,Wednesday,9,likelihood hypothesis. Ensemble Learning: Bagging and boosting.
+2024-12-27,Friday,10,"SVM: Kernel functions, Linear SVM, Nonlinear SVM, Hyper parameter tuning, Handling Imbalanced"
+2024-12-30,Monday,11,Data set. KNN Model.
+2025-01-01,Wednesday,12,SECTION-II
+2025-01-03,Friday,13,"Clustering Algorithms- Unsupervised learning, clustering. Partition based clustering, K-means and K-"
+2025-01-06,Monday,14,"medoid, Hierarchical clustering, Density based clustering algorithms."
+2025-01-08,Wednesday,15,"Association rules mining — Apriori Algorithm, Confidence and Support parameters. Introduction to"
+2025-01-10,Friday,16,"Hidden Markov model, Genetic algorithm."
+2025-01-13,Monday,17,"Dimensionality Reduction Techniques: PCA, SVD etc."
+2025-01-15,Wednesday,18,"Reinforcement learning: Exploration, Exploitation, Rewards, Penalties, Markov Decision Process, Q-"
+2025-01-17,Friday,19,Learning and Bellman Equation.
+2025-01-20,Monday,20,"Artificial Neural Networks: Basics of ANN, Feed Forward Neural Networks, Deep neural networks"
+2025-01-22,Wednesday,21,etc.

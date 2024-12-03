@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2>{{ subject_name }} Lesson Plan</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Day</th>
+                <th>Lecture No</th>
+                <th>Topic</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lecture in lesson_plan %}
+            <tr>
+                <td>{{ lecture.Date }}</td>
+                <td>{{ lecture.Day }}</td>
+                <td>{{ lecture.Lecture_No }}</td>
+                <td>{{ lecture.Topic }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    <a href="{{ url_for('lesson_plan_generator') }}" class="btn btn-secondary">Generate Another Lesson Plan</a>
+</div>
+{% endblock %}

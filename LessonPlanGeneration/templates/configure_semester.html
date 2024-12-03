@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Configure {{ subject_name }} Semester</h2>
+    <form action="{{ url_for('configure_semester') }}" method="post">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label for="start_date" class="form-label">Semester Start Date</label>
+                <input type="date" class="form-control" id="start_date" name="start_date" required>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label for="end_date" class="form-label">Semester End Date</label>
+                <input type="date" class="form-control" id="end_date" name="end_date" required>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Select Lecture Days</label>
+            <div class="row">
+                {% set days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] %}
+                {% for day in days %}
+                <div class="col-md-4">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" 
+                               name="lecture_days" 
+                               value="{{ loop.index0 }}" 
+                               id="day_{{ day }}">
+                        <label class="form-check-label" for="day_{{ day }}">
+                            {{ day }}
+                        </label>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Select Lecture Times</label>
+            <div class="row">
+                <div class="col-md-6">
+                    <label for="start_time" class="form-label">Start Time</label>
+                    <input type="time" class="form-control" id="start_time" name="lecture_times">
+                </div>
+                <div class="col-md-6">
+                    <label for="end_time" class="form-label">End Time</label>
+                    <input type="time" class="form-control" id="end_time" name="lecture_times">
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Select Public Holidays
