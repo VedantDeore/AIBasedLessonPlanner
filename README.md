@@ -2,6 +2,8 @@
 
 The AI-Based Lesson Planner is a tool designed to automate the creation of structured lesson plans using OCR (Optical Character Recognition) and NLP (Natural Language Processing). It extracts data from academic calendars and syllabi, processes it, and generates customizable lesson plans in multiple formats (JSON, PDF, Excel, Word, Image).
 
+![127 0 0 1_8000_](https://github.com/user-attachments/assets/d953a13c-8e40-421b-b7aa-565b6878fdf4)
+
 ## Table of Contents
 - [Features](#features)
 - [Project Setup Steps](#project-setup-steps)
